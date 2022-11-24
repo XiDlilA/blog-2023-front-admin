@@ -55,18 +55,19 @@
     <!-- 一周访问量展示 -->
     <el-card style="margin-top: 1.25rem">
       <div class="e-title">一周访问量</div>
-      <ViewCount :xdata="ViewCountData.x" :ydata="ViewCountData.y" />
+      <ViewCount />
     </el-card>
     <!-- 文章贡献统计 -->
     <el-card style="margin-top: 1.25rem">
       <div class="e-title">文章贡献统计</div>
+      <HeatMap />
     </el-card>
     <el-row :gutter="20" style="margin-top: 1.25rem">
       <!-- 文章浏览量排行 -->
       <el-col :span="16">
         <el-card>
           <div class="e-title">文章浏览量排行</div>
-          <div style="height: 350px"></div>
+          <ArticleRank article-rank="ArticleRankData" />
         </el-card>
       </el-col>
       <!-- 分类数据统计 -->
@@ -105,6 +106,11 @@
 <script setup>
 import { MessageBox } from "@element-plus/icons-vue";
 import ViewCount from "./components/ViewCount.vue";
+import HeatMap from "./components/HeatMap.vue";
+import ArticleRank from "./components/ArticleRank.vue";
+import { useHome } from "../../stores/home";
+import dayjs from "dayjs";
+const home = useHome();
 const pageInfo = {
   loading: true,
   type: 1,
@@ -115,10 +121,22 @@ const pageInfo = {
   articleStatisticsList: [],
   tagDTOList: [],
 };
-const ViewCountData = {
-  x: [],
-  y: [],
-};
+home.updateViewCountData([
+  { date: dayjs(new Date(2022, 11, 22)).format("YYYY-MM-DD"), count: 3 },
+  { date: dayjs(new Date(2022, 11, 23)).format("YYYY-MM-DD"), count: 5 },
+  { date: dayjs(new Date(2022, 11, 24)).format("YYYY-MM-DD-"), count: 4 },
+]);
+home.updateHeadMapData([
+  { date: dayjs(new Date(2022, 10, 22)).format("YYYY-MM-DD"), count: 3 },
+  { date: dayjs(new Date(2022, 10, 23)).format("YYYY-MM-DD"), count: 5 },
+  { date: dayjs(new Date(2022, 10, 24)).format("YYYY-MM-DD"), count: 4 },
+]);
+
+home.updateArticleRankData([
+  { title: "三国演义", rank: "4" },
+  { title: "西游记", rank: "5" },
+  { title: "火影忍者", rank: "6" },
+]);
 </script>
 
 <style scoped>

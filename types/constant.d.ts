@@ -11,3 +11,13 @@ export type User = {
   intro?: string;
   webSite?: string;
 };
+
+export type ArticleRank = {
+  title: string;
+  rank: number;
+};
+
+export type DateCount = {
+  date: Date;
+  count: number;
+};
