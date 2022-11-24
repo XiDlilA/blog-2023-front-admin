@@ -60,38 +60,39 @@ const rules = {
 };
 // methods
 const login = async (formEl) => {
-  await router.push({ path: "/" });
-  // await formEl.validate((valid) => {
-  //   if (valid) {
-  //     // eslint-disable-next-line no-undef
-  //     const captcha = new TencentCaptcha(config.TENCENT_CAPTCHA, function (
-  //       res
-  //     ) {
-  //       if (res.ret === 0) {
-  //         //发送登录请求
-  //         let param = new URLSearchParams();
-  //         param.append("username", loginForm.username);
-  //         param.append("password", loginForm.password);
-  //         request.post("/api/login", param).then(({ data }) => {
-  //           if (data.flag) {
-  //             // 登录后保存用户信息
-  //             user.login(data.data);
-  //             // 加载用户菜单
-  //             generaMenu();
-  //             console.log("登录成功");
-  //             router.push({ path: "/" });
-  //           } else {
-  //             console.log(data.message);
-  //           }
-  //         });
-  //       }
-  //     });
-  //     // 显示验证码
-  //     captcha.show();
-  //   } else {
-  //     return false;
-  //   }
-  // });
+  await formEl.validate((valid) => {
+    if (valid) {
+      // eslint-disable-next-line no-undef
+      const captcha = new TencentCaptcha(config.TENCENT_CAPTCHA, function (
+        res
+      ) {
+        if (res.ret === 0) {
+          //发送登录请求
+          let param = new URLSearchParams();
+          param.append("username", loginForm.username);
+          param.append("password", loginForm.password);
+          user.loginState = true;
+          router.push({ path: "/" });
+          request.post("login", param).then(({ data }) => {
+            if (data.flag) {
+              // 登录后保存用户信息
+              user.login(data.data);
+              // 加载用户菜单
+              generaMenu();
+              console.log("登录成功");
+              router.push({ path: "/" });
+            } else {
+              console.log(data.message);
+            }
+          });
+        }
+      });
+      // 显示验证码
+      captcha.show();
+    } else {
+      return false;
+    }
+  });
 };
 </script>
 
