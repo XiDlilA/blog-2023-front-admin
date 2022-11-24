@@ -35,7 +35,6 @@
         </el-form-item>
       </el-form>
       <!-- 登录按钮 -->
-
     </div>
   </div>
 </template>
@@ -45,7 +44,7 @@ import { generaMenu } from "../../assets/js/menu";
 import { useRouter } from "vue-router";
 import request from "../../utils/request";
 import { useUser } from "../../stores/user";
-import { User, Lock } from '@element-plus/icons-vue';
+import { User, Lock } from "@element-plus/icons-vue";
 import config from "../../assets/js/config";
 // data
 const router = useRouter();
@@ -61,37 +60,38 @@ const rules = {
 };
 // methods
 const login = async (formEl) => {
-    await formEl.validate((valid) => {
-    if (valid) {
-      // eslint-disable-next-line no-undef
-      const captcha = new TencentCaptcha(config.TENCENT_CAPTCHA, function (
-        res
-      ) {
-        if (res.ret === 0) {
-          //发送登录请求
-          let param = new URLSearchParams();
-          param.append("username", loginForm.username);
-          param.append("password", loginForm.password);
-          request.post("/api/login", param).then(({ data }) => {
-            if (data.flag) {
-              // 登录后保存用户信息
-              user.login(data.data);
-              // 加载用户菜单
-              generaMenu();
-              console.log("登录成功");
-              router.push({ path: "/" });
-            } else {
-              console.log(data.message);
-            }
-          });
-        }
-      });
-      // 显示验证码
-      captcha.show();
-    } else {
-      return false;
-    }
-  });
+  await router.push({ path: "/" });
+  // await formEl.validate((valid) => {
+  //   if (valid) {
+  //     // eslint-disable-next-line no-undef
+  //     const captcha = new TencentCaptcha(config.TENCENT_CAPTCHA, function (
+  //       res
+  //     ) {
+  //       if (res.ret === 0) {
+  //         //发送登录请求
+  //         let param = new URLSearchParams();
+  //         param.append("username", loginForm.username);
+  //         param.append("password", loginForm.password);
+  //         request.post("/api/login", param).then(({ data }) => {
+  //           if (data.flag) {
+  //             // 登录后保存用户信息
+  //             user.login(data.data);
+  //             // 加载用户菜单
+  //             generaMenu();
+  //             console.log("登录成功");
+  //             router.push({ path: "/" });
+  //           } else {
+  //             console.log(data.message);
+  //           }
+  //         });
+  //       }
+  //     });
+  //     // 显示验证码
+  //     captcha.show();
+  //   } else {
+  //     return false;
+  //   }
+  // });
 };
 </script>
 

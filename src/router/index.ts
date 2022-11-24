@@ -4,22 +4,27 @@ import type { App } from "vue";
 import guard from "@/router/guard";
 const history = createWebHistory(import.meta.env.BASE_URL);
 const routes = [
-    {
-      path: "/login",
-      name: "login",
-      component: () => import("../views/login/index.vue"),
-    },
-  ];
+  {
+    path: "/",
+    name: "home",
+    component: () => import("../views/home/home.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login/index.vue"),
+  },
+];
 let router = createRouter({
   history: history,
-  routes: routes
+  routes: routes,
 });
 
 export function resetRouter() {
   let newRouter: Router;
   newRouter = createRouter({
     history: history,
-    routes: routes
+    routes: routes,
   });
   router = newRouter;
 }
