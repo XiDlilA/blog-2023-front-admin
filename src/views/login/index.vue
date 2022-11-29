@@ -46,6 +46,7 @@ import request from "../../utils/request";
 import { useUser } from "../../stores/user";
 import { User, Lock } from "@element-plus/icons-vue";
 import config from "../../assets/js/config";
+import autoload from "../../router/aotuload";
 // data
 const router = useRouter();
 const user = useUser();
@@ -72,6 +73,7 @@ const login = async (formEl) => {
           param.append("username", loginForm.username);
           param.append("password", loginForm.password);
           user.loginState = true;
+          autoload(router);
           router.push({ path: "/" });
           request.post("login", param).then(({ data }) => {
             if (data.flag) {

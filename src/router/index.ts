@@ -4,10 +4,24 @@ import type { App } from "vue";
 import guard from "@/router/guard";
 const history = createWebHistory(import.meta.env.BASE_URL);
 const routes = [
+  // {
+  //   path: "/",
+  //   name: "home",
+  //   component: () => import("../views/home/home.vue"),
+  // },
   {
     path: "/",
-    name: "home",
-    component: () => import("../views/home/home.vue"),
+    name: "layout",
+    redirect: { name: "home" },
+    component: () => import("@/layout/index.vue"),
+    meta: { menu: { title: "router.home", icon: "Monitor" } },
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: () => import("@/views/home/home.vue"),
+      },
+    ],
   },
   {
     path: "/login",

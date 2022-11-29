@@ -3,13 +3,13 @@
     <el-menu
       class="side-nav-bar"
       router
-      :collapse="this.$store.state.collapse"
-      :default-active="this.$route.path"
+      :collapse="tab.collapse"
+      :default-active="route.path"
       background-color="#304156"
       text-color="#BFCBD9"
       active-text-color="#409EFF"
     >
-      <template v-for="route of this.$store.state.userMenuList">
+      <template v-for="route of tab.userMenuList">
         <!-- 二级菜单 -->
         <template v-if="route.name && route.children && !route.hidden">
           <el-sub-menu :key="route.path" :index="route.path">
@@ -39,6 +39,12 @@
   </div>
 </template>
 
+<script setup>
+import { useTab } from "../../stores/tab";
+
+const tab = useTab();
+const route = useRoute();
+</script>
 <style scoped>
 .side-nav-bar:not(.el-menu--collapse) {
   width: 210px;
