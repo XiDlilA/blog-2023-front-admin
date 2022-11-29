@@ -1,13 +1,10 @@
 import type { App } from "vue";
 import VueCalendarHeatmap from "vue3-calendar-heatmap";
-
-import "echarts";
-import ECharts from "vue-echarts";
 import * as echarts from "echarts";
 
 export function setupCharts(app: App) {
   app.use(VueCalendarHeatmap);
-  app.component("v-chart", ECharts);
+  app.config.globalProperties.$echarts = echarts;
 }
 
 export function initChart(chart: any, refMain: any, option: {}) {
@@ -15,6 +12,7 @@ export function initChart(chart: any, refMain: any, option: {}) {
     chart.dispose(); //销毁
   }
   chart = echarts.init(refMain.value);
+  console.log(typeof refMain);
   chart.showLoading({
     text: "loading",
     color: "#30a14e",

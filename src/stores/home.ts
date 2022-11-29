@@ -1,14 +1,15 @@
 import { defineStore } from "pinia";
-import type { ArticleRank, DateCount } from "#/constant";
+import type { TitleCount, DateCount } from "#/constant";
 
 export const useHome = defineStore("home", {
   state: () => ({
-    articleRankData: [] as ArticleRank[],
+    articleRankData: [] as TitleCount[],
     viewCountData: [] as DateCount[],
     headMapData: [] as DateCount[],
+    categoryData: [] as TitleCount[],
   }),
   actions: {
-    updateArticleRankData(articleRankData: ArticleRank[]) {
+    updateArticleRankData(articleRankData: TitleCount[]) {
       this.articleRankData = articleRankData;
     },
     updateViewCountData(viewCountData: DateCount[]) {
@@ -16,6 +17,9 @@ export const useHome = defineStore("home", {
     },
     updateHeadMapData(headMapData: DateCount[]) {
       this.headMapData = headMapData;
+    },
+    updateCategoryData(categoryData: TitleCount[]) {
+      this.categoryData = categoryData;
     },
   },
 });

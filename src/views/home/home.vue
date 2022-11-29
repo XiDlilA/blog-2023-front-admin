@@ -74,7 +74,7 @@
       <el-col :span="8">
         <el-card>
           <div class="e-title">文章分类统计</div>
-          <div style="height: 350px"></div>
+          <Category />
         </el-card>
       </el-col>
     </el-row>
@@ -89,6 +89,7 @@
                 <el-radio :label="1">用户</el-radio>
                 <el-radio :label="2">游客</el-radio>
               </el-radio-group>
+              <UserAreaMap />
             </div>
           </div>
         </el-card>
@@ -97,6 +98,7 @@
       <el-col :span="8">
         <el-card>
           <div class="e-title">文章标签统计</div>
+          <TagCloud />
         </el-card>
       </el-col>
     </el-row>
@@ -108,8 +110,11 @@ import { MessageBox } from "@element-plus/icons-vue";
 import ViewCount from "./components/ViewCount.vue";
 import HeatMap from "./components/HeatMap.vue";
 import ArticleRank from "./components/ArticleRank.vue";
+import Category from "./components/Category.vue";
 import { useHome } from "../../stores/home";
 import dayjs from "dayjs";
+import UserAreaMap from "./components/UserAreaMap.vue";
+import TagCloud from "./components/TagCloud.vue";
 const home = useHome();
 const pageInfo = {
   loading: true,
@@ -131,11 +136,15 @@ home.updateHeadMapData([
   { date: dayjs(new Date(2022, 10, 23)).format("YYYY-MM-DD"), count: 5 },
   { date: dayjs(new Date(2022, 10, 24)).format("YYYY-MM-DD"), count: 4 },
 ]);
-
 home.updateArticleRankData([
-  { title: "三国演义", rank: "4" },
-  { title: "西游记", rank: "5" },
-  { title: "火影忍者", rank: "6" },
+  { title: "三国演义", count: "4" },
+  { title: "西游记", count: "5" },
+  { title: "火影忍者", count: "6" },
+]);
+home.updateCategoryData([
+  { title: "动画", count: "3" },
+  { title: "漫画", count: "2" },
+  { title: "游戏", count: "4" },
 ]);
 </script>
 

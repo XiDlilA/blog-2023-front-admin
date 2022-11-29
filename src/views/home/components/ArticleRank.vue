@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+// todo: 将这类 Charts 打包成一个组件
 import { useHome } from "../../../stores/home";
 import { storeToRefs } from "pinia";
 import { initChart } from "../../../plugins/charts";
@@ -32,7 +33,7 @@ const option = reactive({
     {
       name: "浏览量",
       type: "bar",
-      data: data?.value?.map((item) => item.rank),
+      data: data?.value?.map((item) => item.count),
     },
   ],
 });

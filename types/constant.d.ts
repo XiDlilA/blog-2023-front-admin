@@ -12,9 +12,9 @@ export type User = {
   webSite?: string;
 };
 
-export type ArticleRank = {
+export type TitleCount = {
   title: string;
-  rank: number;
+  count: number;
 };
 
 export type DateCount = {
