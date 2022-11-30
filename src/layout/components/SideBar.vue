@@ -9,33 +9,31 @@
       text-color="#BFCBD9"
       active-text-color="#409EFF"
     >
-      <template v-for="route in user.userMenuList">
+      <template v-for="route in user.userMenuList[0].children">
         <!-- 二级菜单 -->
-        <template v-if="route.name !== 'layout' && route.children">
+        <template v-if="route.meta.child === 1">
           <el-sub-menu :key="route.path" :index="route.path">
             <!-- 二级菜单标题 -->
-            <template slot="title">
+            <template #title>
               <el-icon> <component :is="route.meta.menu.icon" /></el-icon>
               <span>{{ route.meta.menu.title }}</span>
             </template>
             <!-- 二级菜单选项 -->
-            <template v-for="item in route.children">
+            <template v-for="item in route.meta.children">
               <el-menu-item :index="item.path">
-                <el-icon> <component :is="item.meta.menu.icon" /></el-icon>
-                <span slot="title">{{ item.meta.menu.title }}</span>
+                <el-icon> <component :is="item.icon" /></el-icon>
+                <template #title>{{ item.title }}</template>
               </el-menu-item>
             </template>
           </el-sub-menu>
         </template>
         <!-- 一级菜单 -->
-        <template v-else>
-          <el-menu-item
-            v-for="item in route.children"
-            :index="item.path"
-            :key="item.path"
-          >
-            <el-icon> <component :is="item.meta.menu.icon" /></el-icon>
-            <span slot="item.meta.menu.title">{{ item.meta.menu.title }}</span>
+        <template v-else-if="route.meta.child === 0">
+          <el-menu-item :index="route.path">
+            <el-icon> <component :is="route.meta.menu.icon" /></el-icon>
+            <span slot="item.meta.menu.title">
+              {{ route.meta.menu.title }}
+            </span>
           </el-menu-item>
         </template>
       </template>
