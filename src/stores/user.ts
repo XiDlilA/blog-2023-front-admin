@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import type { User } from "#/constant";
+import type { RouteRecordRaw } from "vue-router";
 
 export const useUser = defineStore("user", {
   state: () => ({
     user: <User>{},
     loginState: false,
-    userMenuList: [],
+    userMenuList: [] as RouteRecordRaw[],
   }),
   actions: {
     login(user: User) {
@@ -17,7 +18,7 @@ export const useUser = defineStore("user", {
       this.user.webSite = user.webSite;
       this.loginState = true;
     },
-    saveUserMenuList(userMenuList: []) {
+    saveUserMenuList(userMenuList: RouteRecordRaw[]) {
       this.userMenuList = userMenuList;
     },
     logout() {

@@ -12,9 +12,11 @@
       <!-- 内容 -->
       <el-main style="background: #f7f9fb">
         <div class="fade-transform-box">
-          <transition name="fade-transform" mode="out-in">
-            <router-view :key="route.fullPath" />
-          </transition>
+          <router-view v-slot="{ Component }">
+            <transition name="fade-transform" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </div>
       </el-main>
     </el-container>

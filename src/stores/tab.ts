@@ -12,7 +12,6 @@ export const useTab = defineStore("tab", {
     nickname: null,
     intro: null,
     webSite: null,
-    userMenuList: [] as RouteRecordRaw[],
   }),
   actions: {
     saveTab(tab: Tab) {

@@ -1,13 +1,10 @@
 import NProgress from "@/utils/progress";
-import type {
-  RouteLocationNormalized,
-  Router
-} from "vue-router";
+import type { RouteLocationNormalized, Router } from "vue-router";
 import { useUser } from "@/stores/user";
+import autoload from "@/router/aotuload";
 
 class Guard {
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   public run() {
     this.router.beforeEach(this.beforeEach.bind(this));

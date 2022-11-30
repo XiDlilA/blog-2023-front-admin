@@ -9,7 +9,7 @@
       text-color="#BFCBD9"
       active-text-color="#409EFF"
     >
-      <template v-for="route in tab.userMenuList">
+      <template v-for="route in user.userMenuList">
         <!-- 二级菜单 -->
         <template v-if="route.name !== 'layout' && route.children">
           <el-sub-menu :key="route.path" :index="route.path">
@@ -45,6 +45,8 @@
 
 <script setup>
 import { useTab } from "../../stores/tab";
+import { useUser } from "../../stores/user";
+const user = useUser();
 const tab = useTab();
 const route = useRoute();
 </script>

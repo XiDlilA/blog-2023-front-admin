@@ -1,6 +1,6 @@
 import type { Router, RouteRecordRaw } from "vue-router";
 import request from "@/utils/request";
-import { useTab } from "@/stores/tab";
+import { useUser } from "@/stores/user";
 
 let routes: RouteRecordRaw[];
 /**
@@ -40,8 +40,8 @@ async function autoload(router: Router) {
 
   if (data.flag) {
     const userMenuList = data.data;
-    const tab = useTab();
-    tab.userMenuList = userMenuList as RouteRecordRaw[];
+    const user = useUser();
+    user.saveUserMenuList(userMenuList as RouteRecordRaw[]);
     routes = userMenuList as RouteRecordRaw[];
     routes.forEach((r) => router.addRoute(r));
   } else {

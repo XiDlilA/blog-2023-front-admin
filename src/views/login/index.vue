@@ -40,7 +40,6 @@
 </template>
 
 <script setup>
-import { generaMenu } from "../../assets/js/menu";
 import { useRouter } from "vue-router";
 import request from "../../utils/request";
 import { useUser } from "../../stores/user";
@@ -80,7 +79,7 @@ const login = async (formEl) => {
               // 登录后保存用户信息
               user.login(data.data);
               // 加载用户菜单
-              generaMenu();
+              autoload(router);
               console.log("登录成功");
               router.push({ path: "/" });
             } else {
