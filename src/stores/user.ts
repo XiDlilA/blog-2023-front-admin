@@ -6,6 +6,7 @@ export const useUser = defineStore("user", {
   state: () => ({
     user: <User>{},
     loginState: false,
+    loadState: false,
     userMenuList: [] as RouteRecordRaw[],
   }),
   actions: {
@@ -30,6 +31,7 @@ export const useUser = defineStore("user", {
       this.user.webSite = "";
       this.userMenuList = [];
       this.loginState = false;
+      this.loadState = false;
     },
     updateAvatar(avatar: string) {
       this.user.avatar = avatar;
@@ -38,6 +40,9 @@ export const useUser = defineStore("user", {
       this.user.nickname = user.nickname;
       this.user.intro = user.intro;
       this.user.webSite = user.webSite;
+    },
+    success() {
+      this.loadState = true;
     },
   },
   persist: {

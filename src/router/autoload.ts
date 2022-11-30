@@ -77,6 +77,7 @@ async function autoload(router: Router) {
     user.saveUserMenuList(userMenuList as RouteRecordRaw[]);
     routes = userMenuList as RouteRecordRaw[];
     routes.forEach((r) => router.addRoute(r));
+    user.success();
   } else {
     await router.push({ name: "login" });
   }

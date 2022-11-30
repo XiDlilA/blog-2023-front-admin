@@ -1,7 +1,9 @@
 import NProgress from "@/utils/progress";
 import type { RouteLocationNormalized, Router } from "vue-router";
 import { useUser } from "@/stores/user";
-import autoload from "@/router/aotuload";
+import autoload from "./autoload";
+
+const router = useRouter();
 
 class Guard {
   constructor(private router: Router) {}

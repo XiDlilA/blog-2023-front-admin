@@ -45,7 +45,7 @@ import request from "../../utils/request";
 import { useUser } from "../../stores/user";
 import { User, Lock } from "@element-plus/icons-vue";
 import config from "../../assets/js/config";
-import autoload from "../../router/aotuload";
+import autoload from "../../router/autoload";
 // data
 const router = useRouter();
 const user = useUser();

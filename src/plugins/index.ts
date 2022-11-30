@@ -7,9 +7,9 @@ import * as Icons from "@element-plus/icons-vue";
 
 export function setupPlugins(app: App) {
   setupCharts(app);
-  setupRouter(app);
   setupPinia(app);
   setupDayJS(app);
+  setupRouter(app);
   Object.keys(Icons).forEach((key) => {
     app.component(key, Icons[key as keyof typeof Icons]);
   });

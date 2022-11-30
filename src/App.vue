@@ -8,12 +8,13 @@ import { onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useUser } from "@/stores/user";
 import request from "@/utils/request";
-import autoload from "@/router/aotuload";
+import autoload from "@/router/autoload";
 const user = useUser();
 const router = useRouter();
-onBeforeMount(() => {
+onMounted(() => {
   if (user.loginState === true) {
     autoload(router);
+    console.log("loading success");
   }
   // request.post("/report");
 });

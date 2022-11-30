@@ -6,12 +6,6 @@ export const useTab = defineStore("tab", {
   state: () => ({
     collapse: false,
     tabList: [{ name: "home", path: "/home" }],
-    userId: null,
-    roleList: null,
-    avatar: null,
-    nickname: null,
-    intro: null,
-    webSite: null,
   }),
   actions: {
     saveTab(tab: Tab) {
