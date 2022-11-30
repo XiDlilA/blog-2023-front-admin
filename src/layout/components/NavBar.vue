@@ -4,10 +4,11 @@
     <div class="nav-bar">
       <!-- 折叠按钮 -->
       <div class="hamburger-container" @click="trigger">
-        <i :class="isFold" />
+        <el-icon v-if="tabManager.collapse"><Expand /></el-icon>
+        <el-icon v-else><Fold /></el-icon>
       </div>
       <!-- 面包屑导航 -->
-      <el-breadcrumb>
+      <el-breadcrumb separator="|">
         <el-breadcrumb-item v-for="item of breadcrumbList" :key="item.path">
           <span v-if="item.redirect">{{ item.name }}</span>
           <router-link v-else :to="item.path">{{ item.name }}</router-link>
@@ -18,15 +19,16 @@
         <!-- 用户选项 -->
         <el-dropdown @command="handleCommand">
           <el-avatar :size="40" :src="user.user.avatar" />
-          <i class="el-icon-caret-bottom" />
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="setting">
-              <i class="el-icon-s-custom" />个人中心
-            </el-dropdown-item>
-            <el-dropdown-item command="logout" divided>
-              <i class="iconfont el-icon-mytuichu" />退出登录
-            </el-dropdown-item>
-          </el-dropdown-menu>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="setting">
+                <el-icon><UserFilled /></el-icon> 个人中心
+              </el-dropdown-item>
+              <el-dropdown-item command="logout" divided>
+                <el-icon><Promotion /></el-icon> 退出登录
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
         </el-dropdown>
       </div>
     </div>
@@ -40,22 +42,26 @@
           @click="goTo(item)"
         >
           {{ item.name }}
-          <i
-            class="el-icon-close"
-            v-if="item.path !== '/'"
-            @click.stop="removeTab(item)"
-          />
+          <el-icon v-if="item.path !== '/home'" @click.stop="removeTab(item)">
+            <Close />
+          </el-icon>
         </span>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
 import { resetRouter } from "../../router";
 import { useTab } from "../../stores/tab";
 import request from "../../utils/request";
 import { useUser } from "../../stores/user";
+import {
+  Fold,
+  Expand,
+  UserFilled,
+  Promotion,
+  Close,
+} from "@element-plus/icons-vue";
 const router = useRouter();
 const route = useRoute();
 const tabManager = useTab();
@@ -63,13 +69,14 @@ const user = useUser();
 const isSearch = false;
 let breadcrumbList = [];
 
-onMounted(() => {
+onBeforeMount(() => {
   let matched = route.matched.filter((item) => item.name);
   const first = matched[0];
-  if (first && first.name !== "首页") {
-    matched = [{ path: "/", name: "首页" }].concat(matched);
+  if (first && first.name === "layout") {
+    matched.shift();
   }
   breadcrumbList = matched;
+  console.log(breadcrumbList);
   //保存当前页标签
   tabManager.saveTab(route);
 });
@@ -101,7 +108,7 @@ function handleCommand(command) {
     tabManager.resetTab();
     // 清空用户菜单
     resetRouter();
-    this.$router.push({ path: "/login" });
+    router.push({ path: "/login" });
   }
 }
 //标签是否处于当前页
@@ -114,7 +121,7 @@ const isActive = computed(() => {
   };
 });
 const isFold = computed(() => {
-  return tabManager.collapse ? "el-icon-s-unfold" : "el-icon-s-fold";
+  return tabManager.collapse ? "Expand" : "Fold";
 });
 </script>
 

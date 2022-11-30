@@ -4,7 +4,7 @@
     <el-aside width="auto">
       <SideBar />
     </el-aside>
-    <el-container class="main-container">
+    <el-container :style="isFold">
       <!-- 导航栏 -->
       <el-header height="84px" style="padding: 0">
         <NavBar :key="route.fullPath" />
@@ -24,18 +24,17 @@
 <script setup>
 import NavBar from "./components/NavBar.vue";
 import SideBar from "./components/SideBar.vue";
+import { useTab } from "../stores/tab";
 const route = useRoute();
+const tabManager = useTab();
+const isFold = computed(() => ({
+  transition: "margin-left 0.45s",
+  "margin-left": tabManager.collapse ? "64px" : "210px",
+  "min-height": "100vh",
+}));
 </script>
 
 <style scoped>
-.main-container {
-  transition: margin-left 0.45s;
-  margin-left: 210px;
-  min-height: 100vh;
-}
-.hideSideBar {
-  margin-left: 64px;
-}
 .fade-transform-enter-active,
 .fade-transform-leave-active {
   transition: all 0.5s ease 0s;

@@ -4,7 +4,7 @@ import type { Tab } from "#/constant";
 export const useTab = defineStore("tab", {
   state: () => ({
     collapse: false,
-    tabList: [{ name: "首页", path: "/" }],
+    tabList: [{ name: "home", path: "/home" }],
     userId: null,
     roleList: null,
     avatar: null,
@@ -24,7 +24,7 @@ export const useTab = defineStore("tab", {
       this.tabList.splice(index, 1);
     },
     resetTab() {
-      this.tabList = [{ name: "首页", path: "/" }];
+      this.tabList = [{ name: "home", path: "/home" }];
     },
     trigger() {
       this.collapse = !this.collapse;
