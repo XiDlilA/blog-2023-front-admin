@@ -15,7 +15,6 @@ const router = useRouter();
 onMounted(() => {
   if (user.loginState === true) {
     autoload(router);
-    console.log(1);
   }
   // request.post("/report");
 });

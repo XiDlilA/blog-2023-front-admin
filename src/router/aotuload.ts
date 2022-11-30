@@ -27,6 +27,12 @@ async function autoload(router: Router) {
             meta: { menu: { title: "首页", icon: "Monitor" } },
             component: () => import("@/views/home/home.vue"),
           },
+          {
+            path: "setting",
+            name: "setting",
+            meta: { menu: { title: "个人中心", icon: "UserFilled" } },
+            component: () => import("@/views/setting/index.vue"),
+          },
         ],
       },
     ],

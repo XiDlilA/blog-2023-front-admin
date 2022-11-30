@@ -31,8 +31,8 @@
         <template v-else>
           <el-menu-item
             v-for="item in route.children"
-            :index="route.path"
-            :key="route.path"
+            :index="item.path"
+            :key="item.path"
           >
             <el-icon> <component :is="item.meta.menu.icon" /></el-icon>
             <span slot="item.meta.menu.title">{{ item.meta.menu.title }}</span>
