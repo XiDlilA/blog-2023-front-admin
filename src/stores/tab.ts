@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Tab } from "#/constant";
+import type { RouteRecordRaw } from "vue-router";
 
 export const useTab = defineStore("tab", {
   state: () => ({
@@ -11,7 +12,7 @@ export const useTab = defineStore("tab", {
     nickname: null,
     intro: null,
     webSite: null,
-    userMenuList: [],
+    userMenuList: [] as RouteRecordRaw[],
   }),
   actions: {
     saveTab(tab: Tab) {

@@ -1,5 +1,6 @@
 import type { Router, RouteRecordRaw } from "vue-router";
 import request from "@/utils/request";
+import { useTab } from "@/stores/tab";
 
 let routes: RouteRecordRaw[];
 /**
@@ -18,11 +19,12 @@ async function autoload(router: Router) {
         name: "layout",
         redirect: { name: "home" },
         component: () => import("@/layout/index.vue"),
-        meta: { menu: { title: "router.home", icon: "Monitor" } },
+        meta: { menu: { title: "首页", icon: "Monitor" } },
         children: [
           {
             path: "home",
             name: "home",
+            meta: { menu: { title: "首页", icon: "Monitor" } },
             component: () => import("@/views/home/home.vue"),
           },
         ],
@@ -32,6 +34,8 @@ async function autoload(router: Router) {
 
   if (data.flag) {
     const userMenuList = data.data;
+    const tab = useTab();
+    tab.userMenuList = userMenuList as RouteRecordRaw[];
     routes = userMenuList as RouteRecordRaw[];
     routes.forEach((r) => router.addRoute(r));
   } else {

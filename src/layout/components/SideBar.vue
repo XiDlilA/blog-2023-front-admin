@@ -9,29 +9,33 @@
       text-color="#BFCBD9"
       active-text-color="#409EFF"
     >
-      <template v-for="route of tab.userMenuList">
+      <template v-for="route in tab.userMenuList">
         <!-- 二级菜单 -->
-        <template v-if="route.name && route.children && !route.hidden">
+        <template v-if="route.name !== 'layout' && route.children">
           <el-sub-menu :key="route.path" :index="route.path">
             <!-- 二级菜单标题 -->
             <template slot="title">
-              <i :class="route.icon" />
-              <span>{{ route.name }}</span>
+              <el-icon> <component :is="route.meta.menu.icon" /></el-icon>
+              <span>{{ route.meta.menu.title }}</span>
             </template>
             <!-- 二级菜单选项 -->
-            <template v-for="(item, index) of route.children">
-              <el-menu-item v-if="!item.hidden" :key="index" :index="item.path">
-                <i :class="item.icon" />
-                <span slot="title">{{ item.name }}</span>
+            <template v-for="item in route.children">
+              <el-menu-item :index="item.path">
+                <el-icon> <component :is="item.meta.menu.icon" /></el-icon>
+                <span slot="title">{{ item.meta.menu.title }}</span>
               </el-menu-item>
             </template>
           </el-sub-menu>
         </template>
         <!-- 一级菜单 -->
-        <template v-else-if="!route.hidden">
-          <el-menu-item :index="route.path" :key="route.path">
-            <i :class="route.children[0].icon" />
-            <span slot="title">{{ route.children[0].name }}</span>
+        <template v-else>
+          <el-menu-item
+            v-for="item in route.children"
+            :index="route.path"
+            :key="route.path"
+          >
+            <el-icon> <component :is="item.meta.menu.icon" /></el-icon>
+            <span slot="item.meta.menu.title">{{ item.meta.menu.title }}</span>
           </el-menu-item>
         </template>
       </template>
@@ -41,7 +45,6 @@
 
 <script setup>
 import { useTab } from "../../stores/tab";
-
 const tab = useTab();
 const route = useRoute();
 </script>
