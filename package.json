@@ -12,10 +12,13 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@vue/compiler-sfc": "^3.2.45",
     "axios": "^1.2.0",
     "dayjs": "^1.11.6",
     "echarts": "^5.4.0",
     "element-plus": "^2.2.22",
+    "image-conversion": "^2.1.1",
+    "mavon-editor": "3.0.0-beta",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.23",
     "pinia-plugin-persist": "^1.0.0",
