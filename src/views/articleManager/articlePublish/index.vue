@@ -190,7 +190,7 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="addOrEdit = false">取 消</el-button>
+        <el-button @click="unableAddOrEdit">取 消</el-button>
         <el-button type="danger" @click="saveOrUpdateArticle">
           发 表
         </el-button>
@@ -200,7 +200,7 @@
 </template>
 
 <script setup>
-// todo: dialog 延迟响应，需要定位问题！
+// todo: 该页面存在未更新组件
 import dayjs from "dayjs";
 import { useTab } from "../../../stores/tab";
 import request from "../../../utils/request";
@@ -214,7 +214,7 @@ let autoSave = true;
 let categoryName = "";
 let tagName = "";
 let categoryList = [];
-const tagList = [];
+let tagList = [];
 const typeList = [
   {
     type: 1,
@@ -248,8 +248,11 @@ function listCategories() {
 }
 function listTags() {
   request.get("/api/admin/tags/search").then(({ data }) => {
-    this.tagList = data.data;
+    tagList = data.data;
   });
+}
+function unableAddOrEdit() {
+  addOrEdit.value = false;
 }
 function saveOrUpdateArticle() {
   if (article.articleTitle.trim() === "") {
@@ -291,7 +294,7 @@ function saveOrUpdateArticle() {
         message: data.message,
       });
     }
-    addOrEdit = false;
+    addOrEdit.value = false;
   });
   //关闭自动保存功能
   autoSave = false;
@@ -341,7 +344,7 @@ function openModel() {
   }
   // listCategories();
   // listTags();
-  addOrEdit = true;
+  addOrEdit.value = true;
 }
 function uploadCover(response) {
   article.articleCover = response.data;

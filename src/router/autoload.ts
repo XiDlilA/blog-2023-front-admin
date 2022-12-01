@@ -27,6 +27,11 @@ async function autoload(router: Router) {
             icon: "DocumentAdd",
             title: "发表文章",
           },
+          {
+            path: "articleList",
+            icon: "Files",
+            title: "文章列表",
+          },
         ],
       },
       component: () =>
@@ -38,6 +43,12 @@ async function autoload(router: Router) {
       meta: { menu: { title: "发表文章", icon: "DocumentAdd" }, child: 2 },
       component: () =>
         import("@/views/articleManager/articlePublish/index.vue"),
+    },
+    {
+      path: "articleList",
+      name: "文章列表",
+      meta: { menu: { title: "文章列表", icon: "Files" }, child: 2 },
+      component: () => import("@/views/articleManager/articleList/index.vue"),
     },
     {
       path: "setting",
