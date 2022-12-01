@@ -5,7 +5,7 @@ import type { RouteRecordRaw } from "vue-router";
 export const useTab = defineStore("tab", {
   state: () => ({
     collapse: false,
-    tabList: [{ name: "home", path: "/home" }],
+    tabList: [{ name: "首页", path: "/home" }],
   }),
   actions: {
     saveTab(tab: Tab) {

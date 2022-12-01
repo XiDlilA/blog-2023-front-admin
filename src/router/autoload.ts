@@ -14,7 +14,7 @@ async function autoload(router: Router) {
   const menu = [
     {
       path: "article",
-      name: "article",
+      name: "文章管理",
       meta: {
         menu: {
           title: "文章管理",
@@ -34,14 +34,14 @@ async function autoload(router: Router) {
     },
     {
       path: "articlePublish",
-      name: "articlePublish",
+      name: "发表文章",
       meta: { menu: { title: "发表文章", icon: "DocumentAdd" }, child: 2 },
       component: () =>
         import("@/views/articleManager/articlePublish/index.vue"),
     },
     {
       path: "setting",
-      name: "setting",
+      name: "个人中心",
       meta: { menu: { title: "个人中心", icon: "UserFilled" }, child: 0 },
       component: () => import("@/views/setting/index.vue"),
     },
@@ -58,7 +58,7 @@ async function autoload(router: Router) {
         children: [
           {
             path: "home",
-            name: "home",
+            name: "首页",
             meta: { menu: { title: "首页", icon: "Monitor" }, child: 0 },
             component: () => import("@/views/home/home.vue"),
           },

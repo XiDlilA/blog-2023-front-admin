@@ -76,7 +76,7 @@ onBeforeMount(() => {
     matched.shift();
   }
   breadcrumbList = matched;
-  console.log(breadcrumbList);
+  console.log(route.name);
   //保存当前页标签
   tabManager.saveTab(route);
 });
