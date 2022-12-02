@@ -32,6 +32,12 @@ async function autoload(router: Router) {
             icon: "Files",
             title: "文章列表",
           },
+          {
+            path: "articleCategory",
+            icon: "Menu",
+            title: "分类管理",
+          },
+          { path: "articleTag", icon: "CollectionTag", title: "标签管理" },
         ],
       },
       component: () =>
@@ -49,6 +55,19 @@ async function autoload(router: Router) {
       name: "文章列表",
       meta: { menu: { title: "文章列表", icon: "Files" }, child: 2 },
       component: () => import("@/views/articleManager/articleList/index.vue"),
+    },
+    {
+      path: "articleCategory",
+      name: "分类管理",
+      meta: { menu: { title: "分类管理", icon: "Menu" }, child: 2 },
+      component: () =>
+        import("@/views/articleManager/articleCategory/index.vue"),
+    },
+    {
+      path: "articleTag",
+      name: "标签管理",
+      meta: { menu: { title: "标签管理", icon: "CollectionTag" }, child: 2 },
+      component: () => import("@/views/articleManager/articleTag/index.vue"),
     },
     {
       path: "setting",
@@ -81,7 +100,6 @@ async function autoload(router: Router) {
   menu.forEach((item) => {
     data.data[0].children.push(item);
   });
-  console.log(data.data);
   if (data.flag) {
     const userMenuList = data.data;
     const user = useUser();

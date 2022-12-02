@@ -74,18 +74,20 @@ const login = async (formEl) => {
           user.loginState = true;
           autoload(router);
           router.push({ path: "/" });
-          request.post("login", param).then(({ data }) => {
-            if (data.flag) {
-              // 登录后保存用户信息
-              user.login(data.data);
-              // 加载用户菜单
-              autoload(router);
-              console.log("登录成功");
-              router.push({ path: "/" });
-            } else {
-              console.log(data.message);
-            }
-          });
+          console.log(1);
+          // todo: 后端登陆实现
+          // request.post("login", param).then(({ data }) => {
+          //   if (data.flag) {
+          //     // 登录后保存用户信息
+          //     user.login(data.data);
+          //     // 加载用户菜单
+          //     autoload(router);
+          //     console.log("登录成功");
+          //     router.push({ path: "/" });
+          //   } else {
+          //     console.log(data.message);
+          //   }
+          // });
         }
       });
       // 显示验证码

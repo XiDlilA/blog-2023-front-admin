@@ -1,4 +1,5 @@
 import * as dayjs from "dayjs";
+import dayJS from "dayjs";
 import "dayjs/locale/zh-cn";
 import type { App } from "vue";
 
